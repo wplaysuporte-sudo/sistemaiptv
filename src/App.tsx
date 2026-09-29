@@ -1,0 +1,11 @@
+import {useMemo,useState} from 'react';
+import {HlsPlayer} from './player/HlsPlayer';
+type Item={id:number;name:string;category:string;logo?:string;sources:string[]};
+const demo:Item[]=[
+{id:1,name:'Canal Demo HLS',category:'Ao Vivo',sources:['https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8']},
+{id:2,name:'Filmes',category:'Filmes',sources:[]},{id:3,name:'Séries',category:'Séries',sources:[]},{id:4,name:'Jogos do Dia',category:'Esportes',sources:[]}
+];
+export default function App(){const [activated,setActivated]=useState(false);const [code]=useState(()=>String(Math.floor(100000+Math.random()*899999)));const [active,setActive]=useState<Item|null>(null);const [search,setSearch]=useState('');
+ const items=useMemo(()=>demo.filter(x=>x.name.toLowerCase().includes(search.toLowerCase())),[search]);
+ if(!activated)return <main className="activation"><div className="brand">BOY<span>PROVOD</span></div><h1>Vincule sua TV</h1><p>Use este código no celular ou continue em modo de teste.</p><div className="code">{code.slice(0,3)} {code.slice(3)}</div><button autoFocus onClick={()=>setActivated(true)}>ENTRAR NO MODO TESTE</button><small>A próxima etapa ligará este código à API e ao painel de dispositivos.</small></main>;
+ return <main><header><div className="brand small">BOY<span>PROVOD</span></div><input placeholder="Buscar canais, filmes e séries..." value={search} onChange={e=>setSearch(e.target.value)}/><div className="device">TV conectada</div></header><section className="hero"><p>BOYPROVOD PLAYER</p><h1>Todo seu conteúdo em uma interface feita para TV.</h1><span>Web • Android TV • TV Box • Celular</span></section><nav>{['Início','Ao Vivo','Filmes','Séries','Jogos','Favoritos'].map(x=><button key={x}>{x}</button>)}</nav><section className="grid">{items.map((x,i)=><button className="card" key={x.id} autoFocus={i===0} onClick={()=>x.sources.length&&setActive(x)}><div className="art">{x.sources.length?'▶':'◆'}</div><strong>{x.name}</strong><span>{x.category}</span></button>)}</section>{active&&<HlsPlayer sources={active.sources} onClose={()=>setActive(null)}/>}</main>}
