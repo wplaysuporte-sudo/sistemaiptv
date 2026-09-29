@@ -1,25 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:orientation="vertical"
+    android:background="#070A10"
+    android:padding="28dp">
 
-    <androidx.media3.ui.PlayerView
-        android:id="@+id/playerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:use_controller="true"
-        app:show_buffering="always"/>
-
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="32dp"
-        android:background="#99000000"
-        android:padding="12dp"
-        android:text="BOYPROVOD Player"
-        android:textColor="#FFFFFF"/>
-</FrameLayout>
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BOYPROVOD"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/deviceStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="● TV CONECTADA"
+            android:textColor="#54D98C"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/input_tv"
+        android:hint="Buscar canais, filmes e séries..."
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#7E8798"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btnInicio" style="@style/TvNavButton" android:text="Início"/>
+            <Button android:id="@+id/btnLive" style="@style/TvNavButton" android:text="Ao Vivo"/>
+            <Button android:id="@+id/btnMovies" style="@style/TvNavButton" android:text="Filmes"/>
+            <Button android:id="@+id/btnSeries" style="@style/TvNavButton" android:text="Séries"/>
+            <Button android:id="@+id/btnGames" style="@style/TvNavButton" android:text="Jogos do Dia"/>
+            <Button android:id="@+id/btnFavorites" style="@style/TvNavButton" android:text="Favoritos"/>
+            <Button android:id="@+id/btnAddList" style="@style/TvNavButton" android:text="+ Adicionar Lista"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.55"
+            android:background="@drawable/panel_tv"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="28dp">
+            <TextView
+                android:id="@+id/sectionEyebrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BOYPROVOD PLAYER"
+                android:textColor="#5D97FF"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/sectionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Sua TV, do seu jeito."
+                android:textColor="#FFFFFF"
+                android:textSize="34sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/sectionSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Adicione sua lista M3U e teste os canais no player nativo."
+                android:textColor="#A7AFBE"
+                android:textSize="16sp"/>
+            <Button
+                android:id="@+id/btnTestPlayer"
+                style="@style/TvPrimaryButton"
+                android:layout_marginTop="24dp"
+                android:text="▶ Testar Player"/>
+            <TextView
+                android:id="@+id/importStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Nenhuma lista importada"
+                android:textColor="#8F99AA"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/panel_tv">
+            <LinearLayout
+                android:id="@+id/channelContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CANAIS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/emptyChannels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Importe uma lista para ver os canais aqui."
+                    android:textColor="#7E8798"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
